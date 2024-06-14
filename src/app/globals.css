@@ -9,7 +9,7 @@ para deixar as animações mais fluidas*/
   box-sizing: border-box;
   padding: 0;
   margin:0;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 h2{
   font-size: 25px;
@@ -94,4 +94,22 @@ audio{
   border-radius: 10px;
   height: 60px;
   width: 60px ;
+}
+.frase{
+  animation: aparecer 0.2s linear;
+  position: absolute;
+  display: none;
+}
+.frase.show{
+  display: flex;
+}
+@keyframes aparecer {
+  0%{
+    opacity: 0;
+    margin-top: 30px;
+  }
+  100%{
+    opacity: 1;
+    margin-top: 0px;
+  }
 }

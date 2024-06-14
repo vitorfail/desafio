@@ -5,7 +5,7 @@ import { musicas } from "./musicas";
 export default function Home(){
   const dados = musicas[0]
   const musica1 = dados.musica
-
+  const [Tempo, setTempo] = useState("0.07")
   const foto = dados.foto
   const cor = dados.cor
   const [currentTime, setCurrentTime] = useState(0);
@@ -16,11 +16,9 @@ export default function Home(){
     const audio = document.getElementById('audio');
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
-      var element = document.getElementById(String((audio.currentTime/60).toFixed(2)))
-      if(element){
-        element.className = "mostrar-letra"
-      }
+      setTempo(String((audio.currentTime/60).toFixed(2)))
       setDuration(audio.duration);
+      //console.log(String((audio.currentTime/60).toFixed(2)))
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -48,7 +46,6 @@ export default function Home(){
     if (x >= 0 && x <= width) {
       const percentage = x / width;
       const newTime = duration * percentage;
-      console.log(audio.currentTime/60)
       audio.currentTime = newTime;
     }
   };
@@ -64,10 +61,10 @@ export default function Home(){
       <h2>Desafio Acelera ZG</h2>
       <div className="center">
         <div className="display">
-          <div className={Play?"image esconder":"image"} style={estilo}></div>
+          <div className={Play==true && currentTime>0?"image esconder":"image"} style={estilo}></div>
           <div className={Play?"letra mostrar":"letra"}>
             {dados.letras.map((index, key) => (
-              <h3 key={key} id={index[0]}>{index[1]}</h3>
+              <h3 key={key} className={Tempo == index[0]?"frase show":"frase"} id={index[0]}>{index[1]}</h3>
             ))}
           </div>
         </div>
