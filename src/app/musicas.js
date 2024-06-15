@@ -2,7 +2,10 @@ export const musicas = [
     {
         nome:"Erguei as mãos",
         foto:"/padre1.jpeg",
-        cor:"#e98700",
+        cor:"#3DCEEB",
+        musica:"/j.mp3",
+        artista:"Pr. Marcelo Horse",
+        album:"Cações Para Crianças",
         musica:"/j.mp3",
         letras:[
             [0.06,"Quem se lembra?"],
