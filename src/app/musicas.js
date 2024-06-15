@@ -1,8 +1,9 @@
 export const musicas = [
     {
-        nome:"Erguei as mãos",
+        nome:["Erguei", "as mãos"],
         foto:"/padre1.jpeg",
-        cor:"#3DCEEB",
+        cor:"#3d99eb",
+        cor2:"#405ba9",
         musica:"/j.mp3",
         artista:"Pr. Marcelo Horse",
         album:"Cações Para Crianças",
@@ -17,7 +18,7 @@ export const musicas = [
             [0.26,"Erguei as mãos e dai glória a Deus"],
             [0.29,"Erguei as mãos"],
             [0.31,"E cantai como os filhos do Senhor"],
-            [0.28,"Os animaizinhos subiram de dois em dois"],
+            [0.39,"Os animaizinhos subiram de dois em dois"],
             [0.41,"Os animaizinhos subiram de dois em dois"],
             [0.44,"O elefante"],
             [0.47,"E os passarinhos, como os filhos do Senhor(Para não!)"],

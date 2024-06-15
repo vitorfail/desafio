@@ -5,6 +5,9 @@ para deixar as animações mais fluidas*/
   font-family: Beue;
   src: url("./font/BebasNeue-Regular.ttf");
 }
+:root{
+  --setas:rgba(255, 255, 255, 0.493);
+}
 *{
   box-sizing: border-box;
   padding: 0;
@@ -25,11 +28,13 @@ h2{
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  box-shadow: inset 0px -120px 90px 0px rgb(0,0,0,0.33);
 }
 .center{
   width: 55%;
   height: 88%;
+}
+.timer{
+  width: 50px;
 }
 .display{
   display: flex;
@@ -73,22 +78,23 @@ audio{
   display: none;
 }
 .descri{
+  width: 70%;
   margin-left: 20px;
 }
 .reprodutor{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   align-items: center;
 }
 .reprodutor button{
-  width: 30px;
-  height: 30px;
+  min-width: 25px;
+  min-height: 25px;
   border-radius: 50%;
   background: transparent;
   border: 2px solid white;
   outline: none;
-  font-size: 20px;
+  font-size: 15px;
   color: white;
 }
 .musica{
@@ -96,26 +102,138 @@ audio{
   justify-content: center;
   margin-top: 40px;
   width: 100%;
-  height: 100px;
+  height: 70px;
   border-radius: 20px;
   display: flex;
 }
 .capa{
+  margin-left: 20px;
   box-shadow: inset 0px -10px 20px 0px rgb(0,0,0,0.5);
   border: 2px solid black;
   border-radius: 10px;
-  height: 60px;
-  width: 60px ;
+  height: 80%;
+  width: 10% ;
+}
+.descri h4{
+  font-size: 13px;
 }
 .frase{
-  width: 300px;
+  width: 170px;
   animation: aparecer 0.2s linear;
   position: absolute;
   display: none;
   text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .frase.show{
   display: flex;
+}
+.change:hover{
+  color: white;
+} 
+.change:hover>.circulo{
+  border: 2px solid white;
+}
+.change:hover>.linha{
+  background: white;
+}
+.change:hover>.seta{
+  font-size: 80;
+  color: white;
+}
+.change:nth-child(1):hover .circulo{
+  left: 2px;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+}
+.change:nth-child(2):hover .circulo{
+  right: 2px;
+  width: 40px;
+  height: 40px;
+  margin-right: -20px;
+}
+.change{
+  color: rgba(255, 255, 255, 0.493);
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.change:nth-child(1){
+  font-size: 30px;
+}
+.circulo{
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.493);
+  border-radius:50%;
+}
+.change:nth-child(1) .circulo{
+  margin-left: -20px;
+}
+.change:nth-child(2) .circulo{
+  margin-right: -20px;
+}
+#voltar{
+  left: 24px;
+}
+.linha{
+  display: flex;
+  content: "";
+  background: rgba(255, 255, 255, 0.493);
+  height: 2px;
+  width: 100px;
+}
+#proxima{
+  right: 24px;
+}
+.seta{
+  font-family: 'Courier New', Courier, monospace;
+  color: rgba(255, 255, 255, 0.493);
+  margin-top: 3px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 55px;
+}
+.banner{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  font-family: Beue;
+  position: absolute;
+}
+.banner p{
+  font-size: 60px;
+}
+.banner p:nth-child(1){
+  padding-bottom: 50px;
+}
+.banner p:nth-child(2){
+  padding-top: 50px;
+}
+.circle {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  border-radius: 50%;
+  right: -5%;
+  animation: rotacao 1s infinite;
+}
+
+.square {
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 @keyframes aparecer {
   0%{
@@ -125,5 +243,16 @@ audio{
   100%{
     opacity: 1;
     margin-top: 0px;
+  }
+}
+@keyframes rotacao {
+  from{
+    transform: rotateZ(30deg);
+  }
+}
+@media screen and (max-width:680px) {
+  .frase{
+    font-size: 20px;
+    width: 70px;
   }
 }
