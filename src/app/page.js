@@ -4,8 +4,9 @@ import { useState,useEffect } from "react";
 import { musicas } from "./musicas";
 import "./style.scss"
 export default function Home(){
-  const dados = musicas[0]
-  const musica1 = dados.musica
+  const [Indice, setIndice] = useState(0) 
+  const dados = musicas[Indice]
+  const [musica1, setmusica1] = useState(dados.musica)
   const [Tempo, setTempo] = useState("0.00")
   const [intervalosTempo, setintervalosTempo] = useState(armazenar_intervalos())
   const [manterLetra, setmanterLetra] = useState("0.00")
@@ -19,22 +20,20 @@ export default function Home(){
   useEffect(() => {
     document.documentElement.style.setProperty('--cor', cor2);
     document.documentElement.style.setProperty('--cor2', cor);
-    const audio = document.getElementById('audio');
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-      converter_tempo(audio.currentTime)
-      setDuration(audio.duration);
-    };
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-
-    return () => {
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
+    
+   
+  }, [Indice]);
+  const handleTimeUpdate = (event) => {
+    setCurrentTime(event.target.currentTime);
+    converter_tempo(event.target.currentTime)
+    setDuration(event.target.duration);
+  };
   function armazenar_intervalos(){
     var intervalos_de_tempo = []
     dados.letras.forEach(lyric => {
-      intervalos_de_tempo.push((String(lyric[0])))
+      if(lyric !== undefined){
+        intervalos_de_tempo.push((String(lyric[0])))
+      }
     });
     return intervalos_de_tempo
   }
@@ -91,26 +90,50 @@ export default function Home(){
       audio.currentTime = newTime;
     }
   };
-  function numero_aleatorio(min, max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+
   const progressPercent = (currentTime / duration) * 100;
 
+  function proxima(){
+    setintervalosTempo([])
+    setCurrentTime(0)
+    setDuration(0)
+    setPlay(false)
+    setTempo("0.00")
+    if(Indice == musicas.length-1){
+      setmusica1(musicas[0].musica)
+      setIndice(0)
+    }
+    else{
+      setmusica1(musicas[Indice+1].musica)
+      setIndice(Indice+1)
+    }
+  }
+  function voltar(){
+    setintervalosTempo([])
+    setCurrentTime(0)
+    setDuration(0)
+    setPlay(false)
+    setTempo("0.00")
+    if(Indice == 0){
+      setmusica1(musicas[musicas.length-1].musica)
+      setIndice(musicas.length-1)
+    }
+    else{
+      setmusica1(musicas[Indice-1].musica)
+      setIndice(Indice-1)
+    }
+  }
   
-  const estilo = {
-    background:"url("+foto+")",
-    backgroundSize:"cover", 
-    backgroundRepeat:"no-repeat"}
   return (
 
     <div className="container" id="container" style={{background:"linear-gradient(180deg, "+cor+" 0%, "+cor2+" 100%)"}}>
-      <div className="change" id="voltar">
+      <div className="change" onClick={()=> voltar()} id="voltar">
         <p className="seta">&lt;</p>
         <div className="linha"></div>
         <div className="circulo"></div>
         <p>Voltar</p>
       </div>
-      <div className="change" id="proxima">
+      <div className="change" onClick={()=> proxima()} id="proxima">
         <p>Próxima</p>
         <div className="circulo"></div>
         <div className="linha"></div>
@@ -124,41 +147,52 @@ export default function Home(){
       <div className={Play==true || Tempo !== "0.00"?"circle mostrar":"circle"}>
         <svg width={200} height={200}>
 
-        <circle cx="100" cy="100" r="80" fill="none" stroke="white" stroke-width="10" strokeDasharray="1,08" />        </svg>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="white" strokeWidth="10" strokeDasharray="1,08" />        </svg>
       </div>
       <div className="center">
         <div className="display">
-          <div className={Play==true || Tempo !== "0.00" ?"image esconder":"image"} style={estilo}></div>
+          <div className={Play==true || Tempo !== "0.00" ?"image esconder":"image"} style={{
+    background:"url("+foto+")",
+    backgroundSize:"cover", 
+    backgroundRepeat:"no-repeat"}}></div>
           <div className={Play==true || Tempo !== "0.00"? "letra mostrar":"letra"}>
-            {dados.letras.map((index, key) => (
-              <h3 key={key} className={manterLetra == (index[0])?"frase show":"frase"} id={index[0]}>{index[1]}</h3>
+          {dados.letras && dados.letras.map((index, key) => (
+              // Verifica se index não é undefined antes de prosseguir
+              index !== undefined && (
+                <h3 key={key} className={manterLetra == index[0] ? "frase show" : "frase"} id={index[0]}>
+                  {index[1]}
+                </h3>
+              )
             ))}
-            <div class="spectrograph">
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
-              <div class="spectrograph__bar"></div>
+            <div className="spectrograph">
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
+              <div className="spectrograph__bar"></div>
           </div>
           </div>
         </div>
         <div className="musica" style={{background:cor}}>
-          <div className="capa" style={estilo}></div>
+          <div className="capa" style={{
+    background:"url("+foto+")",
+    backgroundSize:"cover", 
+    backgroundRepeat:"no-repeat"}}></div>
           <div className="descri">
             <h4>{dados.nome[0]+" "+dados.nome[1]+"("+dados.artista+")"}</h4>
             <p className="album">{dados.album} </p>
@@ -174,9 +208,10 @@ export default function Home(){
               <p className="timer">{Tempo}</p>
               <button onClick={eventoPlayPausar}>{Play? "❚❚":"►"}</button>
             </div>
-            <audio controls className="audio" id="audio">
+            <audio controls key={Indice} className="audio" onTimeUpdate={handleTimeUpdate} id="audio">
+              {
                 <source src={musica1} type="audio/mpeg" />
-                Your browser does not support the audio element.
+              }
             </audio>
           </div>
         </div>
