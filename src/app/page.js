@@ -2,6 +2,7 @@
 
 import { useState,useEffect } from "react";
 import { musicas } from "./musicas";
+import "./style.scss"
 export default function Home(){
   const dados = musicas[0]
   const musica1 = dados.musica
@@ -16,30 +17,12 @@ export default function Home(){
   const [Play, setPlay] = useState(false);
 
   useEffect(() => {
+    document.documentElement.style.setProperty('--cor', cor2);
+    document.documentElement.style.setProperty('--cor2', cor);
     const audio = document.getElementById('audio');
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
-      if(String(Math.trunc(audio.currentTime)).length<3){
-        if((Math.trunc(audio.currentTime)<60)){
-          checkar_tempo(String(Math.trunc(audio.currentTime)/100))  
-        }
-        else{
-          if(Math.trunc(audio.currentTime)%60<10){
-            checkar_tempo("1.0"+Math.trunc(audio.currentTime)%60)
-          }
-          else{
-            checkar_tempo("1."+Math.trunc(audio.currentTime)%60)
-          }
-        }
-      }
-      else{
-        if(Math.trunc(audio.currentTime)%60<10){
-          checkar_tempo(Math.trunc(Math.trunc(audio.currentTime)/60)+".0"+Math.trunc(audio.currentTime)%60)
-        }
-        else{
-          checkar_tempo(Math.trunc(Math.trunc(audio.currentTime)/60)+"."+Math.trunc(audio.currentTime)%60)
-        }
-      }
+      converter_tempo(audio.currentTime)
       setDuration(audio.duration);
     };
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -59,6 +42,29 @@ export default function Home(){
     setTempo(t);
     if(intervalosTempo.includes(t)){
       setmanterLetra(t)
+    }
+  }
+  function converter_tempo(tempo){
+    if(String(Math.trunc(tempo)).length<3){
+      if((Math.trunc(tempo)<60)){
+        checkar_tempo(String(Math.trunc(tempo)/100))  
+      }
+      else{
+        if(Math.trunc(tempo)%60<10){
+          checkar_tempo("1.0"+Math.trunc(tempo)%60)
+        }
+        else{
+          checkar_tempo("1."+Math.trunc(tempo)%60)
+        }
+      }
+    }
+    else{
+      if(Math.trunc(tempo)%60<10){
+        checkar_tempo(Math.trunc(Math.trunc(tempo)/60)+".0"+Math.trunc(tempo)%60)
+      }
+      else{
+        checkar_tempo(Math.trunc(Math.trunc(tempo)/60)+"."+Math.trunc(tempo)%60)
+      }
     }
   }
   const eventoPlayPausar = () => {
@@ -81,10 +87,13 @@ export default function Home(){
     if (x >= 0 && x <= width) {
       const percentage = x / width;
       const newTime = duration * percentage;
+      converter_tempo(newTime)
       audio.currentTime = newTime;
     }
   };
-
+  function numero_aleatorio(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
   const progressPercent = (currentTime / duration) * 100;
 
   
@@ -112,15 +121,10 @@ export default function Home(){
         <p className="segundo">{dados.nome[1]}</p>
       </div>
       
-      <div className="circle">
+      <div className={Play==true || Tempo !== "0.00"?"circle mostrar":"circle"}>
         <svg width={200} height={200}>
-          <defs>
-            <pattern id="dots" x={0} y={0} width={10} height={10} patternUnits="useSpaceOneUse">
-            <circle cx={5} cy={5} r={1} fill="white"></circle>
-            </pattern>
-          </defs>
-          <circle cx={100} cy={100} r={50} fill="url(#dots" stroke="black" strokeWidth={2}></circle>
-        </svg>
+
+        <circle cx="100" cy="100" r="80" fill="none" stroke="white" stroke-width="10" strokeDasharray="1,08" />        </svg>
       </div>
       <div className="center">
         <div className="display">
@@ -129,6 +133,28 @@ export default function Home(){
             {dados.letras.map((index, key) => (
               <h3 key={key} className={manterLetra == (index[0])?"frase show":"frase"} id={index[0]}>{index[1]}</h3>
             ))}
+            <div class="spectrograph">
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+              <div class="spectrograph__bar"></div>
+          </div>
           </div>
         </div>
         <div className="musica" style={{background:cor}}>

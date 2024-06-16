@@ -6,6 +6,8 @@ para deixar as animações mais fluidas*/
   src: url("./font/BebasNeue-Regular.ttf");
 }
 :root{
+  --cor:none;
+  --cor2:none;
   --setas:rgba(255, 255, 255, 0.493);
 }
 *{
@@ -50,6 +52,8 @@ h2{
   height: 100%;
 }
 .image.esconder{
+  box-shadow: inset 0px -120px 90px 0px rgb(0,0,0,0.5);
+  animation: sombra 3s infinite alternate;
   width: 50%;
 }
 h3{
@@ -69,9 +73,15 @@ p{
   justify-content: center;
   overflow: hidden;
   width: 0%;
-  height: 10%;
+  height: 100%;
+  border-radius: 20px;
 }
 .letra.mostrar{
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  display: flex;
+  border: 0.5px solid rgb(255, 255, 255, 0.4);
   width: 50%;
 }
 audio{
@@ -118,7 +128,8 @@ audio{
   font-size: 13px;
 }
 .frase{
-  font-family: Beue;
+  text-shadow: 0px 0px 12px rgb(0,0,0,0.1);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 170px;
   animation: aparecer 0.2s linear;
   position: absolute;
@@ -246,9 +257,21 @@ audio{
   margin-right: -55%;
   position: absolute;
   border-radius: 50%;
-  animation: rotacao 2s infinite;
+  animation: rotacao 3s linear infinite;
+}
+.circle.mostrar{
+  margin-top: -24%;
+  margin-right: 28%;
 }
 
+@keyframes sombra {
+  0%{
+    box-shadow: inset 0px -120px 90px 0px rgb(0,0,0,0.5), 0px 0px 10px var(--cor), 0px 0px 10px var(--cor2);
+  }
+  100%{
+    box-shadow: inset 0px -120px 90px 0px rgb(0,0,0,0.5), 0px 0px 300px var(--cor), 0px 0px 300px var(--cor2);
+  }
+}
 @keyframes aparecer {
   0%{
     opacity: 0;
@@ -260,13 +283,26 @@ audio{
   }
 }
 @keyframes rotacao {
-  from{
-    transform: rotateZ(30deg);
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
   }
 }
 @media screen and (max-width:680px) {
   .frase{
     font-size: 20px;
     width: 70px;
+  }
+  .center{
+    width: 75%;
+  }
+  .linha{
+    width: 50px;
+  }
+  .circle.mostrar{
+    margin-top: -44vh;
+    margin-right: 38vw;
   }
 }
