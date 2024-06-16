@@ -8,7 +8,7 @@ export default function Home(){
   const dados = musicas[Indice]
   const [musica1, setmusica1] = useState(dados.musica)
   const [Tempo, setTempo] = useState("0.00")
-  const [intervalosTempo, setintervalosTempo] = useState(armazenar_intervalos())
+  const [intervalosTempo, setintervalosTempo] = useState([])
   const [manterLetra, setmanterLetra] = useState("0.00")
   const foto = dados.foto
   const cor = dados.cor
@@ -20,18 +20,19 @@ export default function Home(){
   useEffect(() => {
     document.documentElement.style.setProperty('--cor', cor2);
     document.documentElement.style.setProperty('--cor2', cor);
-    
+    armazenar_intervalos(dados.letras) 
    
-  }, [Indice]);
+  }, [Indice, intervalosTempo]);
   const handleTimeUpdate = (event) => {
     setCurrentTime(event.target.currentTime);
     converter_tempo(event.target.currentTime)
     setDuration(event.target.duration);
   };
-  function armazenar_intervalos(){
+  function armazenar_intervalos(d){
     var intervalos_de_tempo = []
-    dados.letras.forEach(lyric => {
-      if(lyric !== undefined){
+    d.forEach(lyric => {
+      if(lyric){
+        console.log(lyric)
         intervalos_de_tempo.push((String(lyric[0])))
       }
     });
@@ -102,10 +103,12 @@ export default function Home(){
     if(Indice == musicas.length-1){
       setmusica1(musicas[0].musica)
       setIndice(0)
+      setintervalosTempo(armazenar_intervalos())
     }
     else{
       setmusica1(musicas[Indice+1].musica)
       setIndice(Indice+1)
+      setintervalosTempo(armazenar_intervalos())
     }
   }
   function voltar(){
@@ -117,10 +120,12 @@ export default function Home(){
     if(Indice == 0){
       setmusica1(musicas[musicas.length-1].musica)
       setIndice(musicas.length-1)
+      setintervalosTempo(armazenar_intervalos())
     }
     else{
       setmusica1(musicas[Indice-1].musica)
       setIndice(Indice-1)
+      setintervalosTempo(armazenar_intervalos())
     }
   }
   
