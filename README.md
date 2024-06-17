@@ -24,7 +24,7 @@ Todavia essa tag peca muito no qusito UX Design pois ela não nos permite altera
 qualquer característica da aparência desse player, como cores e afins. Por isso decidi criar minha própria progress bar
 e sincroniza-la com a tag <audio> por meiodo evento ```audionewupdate```. Esse evento é disparado 4 vezes por segundo.  
 ![alt text](image.png)
-Esse ``progressPercent``` é usado para checar em quantos porcento está o aúdio, fazendo isso atraves 
+Esse ```progressPercent``` é usado para checar em quantos porcento está o aúdio, fazendo isso atraves 
 de uma simples regra de três. Esse percentual por sua vez é jogado diretamente na ``div`` do progress bar
 ![alt text](image-1.png)
 Fazendo assim com que ela se mova em sincronia com a execução do áudio.
