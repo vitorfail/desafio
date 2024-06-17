@@ -7,13 +7,21 @@ serão instaladas apenas os pactoes necessários para executar esse projeto
 
 As informções necessárias para a exibição das músicas fica armazenada em uma Array dentro do arquivo ```musicas.js```
 Esse Array possui um Json para cada música. Dentro deles é necessárioque haja as seguintes chaves:
+
 ```nome``` Que irá conter um Array com duas Strings, que juntas forma o nome da música
+
 ```foto:``` Um String com o caminho para a foto. A foto obrigatoriamente vai estar a pasta `public` 
+
 ```cor``` A primeira cor do degradê da página
+
 ```cor2``` A segunda cor para o degradê da página
+
 ```musica``` Um string com o  caminho para música, que também estará na página `public`
+
 ```artista``` Uma string com o nome do artista/banda
+
 ```album``` Um string com o Nome do album
+
 ```letras``` Um array com várias arrays´s dentro. Contendo o tempo da musica no formato "M.SS" 
 e a frase da música, respectivamente.
 
@@ -86,4 +94,4 @@ Enquanto o áudio for executado haverá a seguinte dinâmica:
 ``setTempo`` determina o tempo a cada segundo já em seguida chequamos se dentro de ``intervalosTempo`` há 
 esse tempo e só então determinamos a variável ```manterLetra```.
 Essa variável só haverá mudança quando de fato houver um tempo listado. Então não vai haver um momento 
-que na tenha uma letra sendo exibida.  
+que não tenha uma letra sendo exibida.  
