@@ -159,8 +159,8 @@ export default function Home(){
             <span style={{"--flip":7}}>a</span>
           </div>
           <div className="flip_letters">
-            <span style={{"--flip":8}}>A</span>
-            <span style={{"--flip":9}}>Z</span>
+            <span style={{"--flip":8}}>Z</span>
+            <span style={{"--flip":9}}>G</span>
           </div>
         </div>
         <div className="wave"></div>
