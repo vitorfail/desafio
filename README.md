@@ -66,7 +66,7 @@ Então a lógica é bem simples, enquanto a música é repoduzida a variável ``
 no momento que o valor dela for igual ao valor determinadoa para cada frase, a classe dela muadará para
 outra que fará ela aparecer seguida de uma animação. 
 
-# Mas, porque não usar a variável tempo?
+# Mas, porque não usar a variável Tempo🤔?
 
 Bom, pode não ser tão simples.....
 Vamos mostrar com um exemplo.
@@ -100,3 +100,12 @@ Enquanto o áudio for executado haverá a seguinte dinâmica:
 esse tempo e só então determinamos a variável ```manterLetra```.
 Essa variável só haverá mudança quando de fato houver um tempo listado. Então não vai haver um momento 
 que não tenha uma letra sendo exibida.  
+
+## 3 Sobre a troca de Músicas
+
+Ela funciona de maneira simples. HÁ um **useState** chamado `Indice`, nele fica o indice referente ao número de cada json dentro do array do arquivo `musicas.js`.
+Quando o usuário cliqua em próxima ativa uma função, essa função por sua vez zera todas a variáveis globais como `Tempo`, `manterLetra`, e etc. E em seguida chequa o limite 
+do array. Pois caso o usuário já esteja no final da lista ela joga coloca o `Indice` em 0, e caso esteja no começo e o usuário clique em voltar o valor do `Indice` será igual
+ao último elemento. 
+
+Bom espero que eu tenha sido sucinto e claro na explicação, Abraços 🖖
