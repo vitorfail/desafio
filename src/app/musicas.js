@@ -105,7 +105,7 @@ export const musicas = [
         foto:"/g3.jpg",
         cor:"#4A8D4E",
         cor2:"#293D2A",
-        musica:"/espelhos.mp3",
+        musica:"/espelho.mp3",
         artista:"Oficina G3",
         album:"Indiferença",
         letras:[
@@ -117,7 +117,7 @@ export const musicas = [
             [0.50, "Segundo, já estava escrito"],
             [0.57, "Nasceu"],
             [0.59, "Sofreu"],
-            [1.01, "Morreu ,por nós"]
+            [1.01, "Morreu ,por nós"],
             [1.05, "Seu sangue lá na cruz derramou"],
             [1.11, "Nasceu, sofreu..."],
             [1.17, "Os homens e seus espelhos mágicos"],
@@ -126,13 +126,13 @@ export const musicas = [
             [1.36,"Pois ressucitou"],
             [1.39, "E nem o toque de vida"],
             [1.44, "Do Filho do amor"],
-            [1.59, "Nasceu"],
+            [1.58, "Nasceu"],
             [1.51,"Sofreu"],
             [1.53, "Morreu, por nós"],  
             [1.58, "Seu sangue lá na cruz derramou"],
             [2.05, "Nasceu"],
             [2.06, "Sofreu"],
-            [2.09, "Morreu, por nós"]
+            [2.09, "Morreu, por nós"],
             [2.13, "Seu sangue lá na cruz derramou"],
             [2.19, "Na cruz lutou"],
             [2.24, "Na cruz venceu"],
@@ -146,15 +146,14 @@ export const musicas = [
             [3.22,"Seu sangue lá na cruz derramou"],
             [3.28,"Nasceu"],
             [3.29, "Sofreu"],
-            [3.31, "Morreu por nós"]
+            [3.31, "Morreu por nós"],
             [3.36,"Seu sangue lá na cruz derramou"],
             [3.42,"Na cruz lutou"],
-            [3.47, "Na cruz venceu"]
+            [3.47, "Na cruz venceu"],
             [3.51,"E sua vida nos deu"],
             [3.54,"Pra que a vida estivesse em nós"],
             [4.03,"Estivesse em nós"],
-            [4.12,"Estivesse em nós"],
-
+            [4.12,"Estivesse em nós"]
         ]
     }
 ]

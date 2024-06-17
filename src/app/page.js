@@ -8,7 +8,7 @@ export default function Home(){
   const dados = musicas[Indice]
   const [musica1, setmusica1] = useState(dados.musica)
   const [Tempo, setTempo] = useState("0.00")
-  const [intervalosTempo, setintervalosTempo] = useState([])
+  const [intervalosTempo, setintervalosTempo] = useState(armazenar_intervalos(dados.letras))
   const [manterLetra, setmanterLetra] = useState("0.00")
   const foto = dados.foto
   const cor = dados.cor
@@ -16,23 +16,33 @@ export default function Home(){
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [Play, setPlay] = useState(false);
+  const [load, setload] =useState(true)
 
   useEffect(() => {
     document.documentElement.style.setProperty('--cor', cor2);
     document.documentElement.style.setProperty('--cor2', cor);
-    armazenar_intervalos(dados.letras) 
-   
+    setTimeout(() => {
+      setload(false)
+    }, 3500);
   }, [Indice, intervalosTempo]);
   const handleTimeUpdate = (event) => {
-    setCurrentTime(event.target.currentTime);
-    converter_tempo(event.target.currentTime)
-    setDuration(event.target.duration);
+    if(event.target.currentTime === event.target.duration){
+      setCurrentTime(0)
+      setDuration(0)
+      setTempo("0.00")
+      setmanterLetra("0.00")
+      setPlay(false)
+    }
+    else{
+      setCurrentTime(event.target.currentTime);
+      converter_tempo(event.target.currentTime)
+      setDuration(event.target.duration);  
+    }
   };
   function armazenar_intervalos(d){
     var intervalos_de_tempo = []
     d.forEach(lyric => {
       if(lyric){
-        console.log(lyric)
         intervalos_de_tempo.push((String(lyric[0])))
       }
     });
@@ -76,7 +86,6 @@ export default function Home(){
     }
     setPlay(!Play);
   };
-
   const atualizarBarra = (e) => {
     const audio = document.getElementById('audio');
     const rect = e.target.getBoundingClientRect();
@@ -91,7 +100,6 @@ export default function Home(){
       audio.currentTime = newTime;
     }
   };
-
   const progressPercent = (currentTime / duration) * 100;
 
   function proxima(){
@@ -100,15 +108,16 @@ export default function Home(){
     setDuration(0)
     setPlay(false)
     setTempo("0.00")
+    setmanterLetra("0.00")
     if(Indice == musicas.length-1){
       setmusica1(musicas[0].musica)
       setIndice(0)
-      setintervalosTempo(armazenar_intervalos())
+      setintervalosTempo(armazenar_intervalos(musicas[0].letras))
     }
     else{
       setmusica1(musicas[Indice+1].musica)
       setIndice(Indice+1)
-      setintervalosTempo(armazenar_intervalos())
+      setintervalosTempo(armazenar_intervalos(musicas[Indice+1].letras))
     }
   }
   function voltar(){
@@ -117,21 +126,45 @@ export default function Home(){
     setDuration(0)
     setPlay(false)
     setTempo("0.00")
+    setmanterLetra("0.00")
     if(Indice == 0){
       setmusica1(musicas[musicas.length-1].musica)
       setIndice(musicas.length-1)
-      setintervalosTempo(armazenar_intervalos())
+      setintervalosTempo(armazenar_intervalos(musicas[musicas.length-1].letras))
     }
     else{
       setmusica1(musicas[Indice-1].musica)
       setIndice(Indice-1)
-      setintervalosTempo(armazenar_intervalos())
+      setintervalosTempo(armazenar_intervalos(musicas[Indice-1].letras))
     }
   }
-  
-  return (
+  const estilo = {
+    backgroundImage: "url("+foto+")",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    backgroundSize: 'cover'
+  };
 
+  return (
     <div className="container" id="container" style={{background:"linear-gradient(180deg, "+cor+" 0%, "+cor2+" 100%)"}}>
+      <div className={load?"loading":"loading hide"}>
+        <div className="logo">
+          <div className="flip_letters">
+            <span style={{"--flip":1}}>A</span>
+            <span style={{"--flip":2}}>c</span>
+            <span style={{"--flip":3}}>e</span>
+            <span style={{"--flip":4}}>l</span>
+            <span style={{"--flip":5}}>e</span>
+            <span style={{"--flip":6}}>r</span>
+            <span style={{"--flip":7}}>a</span>
+          </div>
+          <div className="flip_letters">
+            <span style={{"--flip":8}}>A</span>
+            <span style={{"--flip":9}}>Z</span>
+          </div>
+        </div>
+        <div className="wave"></div>
+      </div>
       <div className="change" onClick={()=> voltar()} id="voltar">
         <p className="seta">&lt;</p>
         <div className="linha"></div>
@@ -145,7 +178,7 @@ export default function Home(){
         <p className="seta">&gt;</p>
       </div>
       <div className={Play==true || Tempo !== "0.00"?"banner show":"banner"}>
-        <p className="primeiro">{dados.nome[0]}</p>
+        <p className="primeiro">{(Indice+1)+"."+dados.nome[0]}</p>
         <p className="segundo">{dados.nome[1]}</p>
       </div>
       
@@ -156,10 +189,7 @@ export default function Home(){
       </div>
       <div className="center">
         <div className="display">
-          <div className={Play==true || Tempo !== "0.00" ?"image esconder":"image"} style={{
-    background:"url("+foto+")",
-    backgroundSize:"cover", 
-    backgroundRepeat:"no-repeat"}}></div>
+          <div className={Play==true || Tempo !== "0.00" ?"image esconder":"image"} style={estilo}></div>
           <div className={Play==true || Tempo !== "0.00"? "letra mostrar":"letra"}>
           {dados.letras && dados.letras.map((index, key) => (
               // Verifica se index não é undefined antes de prosseguir
@@ -194,10 +224,7 @@ export default function Home(){
           </div>
         </div>
         <div className="musica" style={{background:cor}}>
-          <div className="capa" style={{
-    background:"url("+foto+")",
-    backgroundSize:"cover", 
-    backgroundRepeat:"no-repeat"}}></div>
+          <div className="capa" style={estilo}></div>
           <div className="descri">
             <h4>{dados.nome[0]+" "+dados.nome[1]+"("+dados.artista+")"}</h4>
             <p className="album">{dados.album} </p>
