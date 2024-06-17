@@ -60,10 +60,10 @@ e as frases. Eu uso função ``map`` que é um como um forEach. Para cada array 
 para nomeá-lo. A condição é ```manterLetra == index[0]```.
 
 ```index[0]```é o primeiro elemento do array, que correspondo ao tempo da frase
-```manterLetra``` ´e mais um `useState`, porém esse é usado paraa segurar o tempo da frase.
+```manterLetra``` ´e mais um `useState`, porém esse é usado para segurar o tempo da frase.
 
 Então a lógica é bem simples, enquanto a música é repoduzida a variável ``manterLetra`` esta sendo atualizada,
-no momento que o valor dela for igual ao valor determinadoa para cada frase, a classe dela muadará para
+no momento que o valor dela for igual ao valor determinado para cada frase, a classe dela mudará para
 outra que fará ela aparecer seguida de uma animação. 
 
 # Mas, porque não usar a variável Tempo🤔?
