@@ -33,7 +33,7 @@ Seguindo o exemplo:
 ## 2.1 Sobre o player
 
 Bom, no HTML temos a tag ```<audio>``` que por sua vez exibe e reproduz um audio com player, e temporizador. 
-Todavia essa tag peca muito no qusito UX Design pois ela não nos permite alterar nativamente 
+Todavia essa tag peca muito no quesito UX Design pois ela não nos permite alterar nativamente 
 qualquer característica da aparência desse player, como cores e afins. Por isso decidi criar minha própria progress bar
 e sincroniza-la com a tag <audio> por meiodo evento ```audionewupdate```. Esse evento é disparado 4 vezes por segundo.  
 ![alt text](image.png)
