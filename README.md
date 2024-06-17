@@ -25,6 +25,11 @@ Esse Array possui um Json para cada música. Dentro deles é necessárioque haja
 ```letras``` Um array com várias arrays´s dentro. Contendo o tempo da musica no formato "M.SS" 
 e a frase da música, respectivamente.
 
+Seguindo o exemplo:
+
+![image](https://github.com/vitorfail/desafio/assets/95591747/126b58f3-3b37-4932-9ad4-5bd68146907d)
+
+
 ## 2.1 Sobre o player
 
 Bom, no HTML temos a tag ```<audio>``` que por sua vez exibe e reproduz um audio com player, e temporizador. 
