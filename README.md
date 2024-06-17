@@ -57,9 +57,13 @@ outra que fará ela aparecer seguida de uma animação.
 
 Bom, pode não ser tão simples.....
 Vamos mostrar com um exemplo.
+
 ```[2.03, "Dentro da hilux]```
+
 ```[2.04, "Ela movimenta no rítimo do Tuts Tuts"]```
+
 ```[2.07, "Vidro embassando ela rossando na fivela"]```
+
 
 No momento que a variável ``Tempo`` obtiver o valor de 2.04 ela irá exibir a segunda frase, 
 porém como eu falei anteriormente essa variável é atualizada a cada segundo, o que significa dizer 
