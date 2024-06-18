@@ -104,7 +104,7 @@ export const musicas = [
         nome:["Espelhos", "Mágicos"],
         foto:"/g3.jpg",
         cor:"#4A8D4E",
-        cor2:"#293D2A",
+        cor2:"rgb(19 24 39)",
         musica:"/espelho.mp3",
         artista:"Oficina G3",
         album:"Indiferença",

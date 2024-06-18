@@ -165,14 +165,14 @@ export default function Home(){
         </div>
         <div className="wave"></div>
       </div>
-      <div className="change" onClick={()=> voltar()} id="voltar">
+      <div className="change um" onClick={()=> voltar()} id="voltar">
         <p className="seta">&lt;</p>
         <div className="linha"></div>
         <div className="circulo"></div>
-        <p>Voltar</p>
+        <p className="valor">Voltar</p>
       </div>
-      <div className="change" onClick={()=> proxima()} id="proxima">
-        <p>Próxima</p>
+      <div className="change dois" onClick={()=> proxima()} id="proxima">
+        <p className="valor">Próxima</p>
         <div className="circulo"></div>
         <div className="linha"></div>
         <p className="seta">&gt;</p>
