@@ -17,6 +17,7 @@ export default function Home(){
   const [duration, setDuration] = useState(0);
   const [Play, setPlay] = useState(false);
   const [load, setload] =useState(true)
+  const [circulo, setcirculo] = useState(criar_circulo("As Mais Tocadas"))
 
   useEffect(() => {
     document.documentElement.style.setProperty('--cor', cor2);
@@ -102,6 +103,27 @@ export default function Home(){
   };
   const progressPercent = (currentTime / duration) * 100;
 
+  function criar_circulo(letra, delimitador = "•"){
+    const spans = [];
+  
+    letra = letra.trim().replaceAll(" ", delimitador) + delimitador;
+    const numChars = letra.length;
+    const degVal = 90 / (numChars / 4);
+  
+    letra.split("").forEach((char, idx) => {
+      
+      if (char === delimitador){
+        const span = <span key={idx} style={{color:cor, transform:`rotate(${180 - degVal * idx}deg)`}}>{char}</span>
+        spans.push(span);
+      } 
+      else{
+        const span = <span key={idx} style={{transform:`rotate(${180 - degVal * idx}deg)`}}>{char}</span>
+        spans.push(span);
+      }
+    });
+  
+    return spans;
+  };
   function proxima(){
     setintervalosTempo([])
     setCurrentTime(0)
@@ -178,15 +200,19 @@ export default function Home(){
         <p className="seta">&gt;</p>
       </div>
       <div className={Play==true || Tempo !== "0.00"?"banner show":"banner"}>
-        <p className="primeiro">{(Indice+1)+"."+dados.nome[0]}</p>
+        <div className="primeiro">
+          <p style={{color:cor}}>{(Indice+1)+"."}</p>
+          <p >{dados.nome[0]}</p>
+        </div>
+        
         <p className="segundo">{dados.nome[1]}</p>
       </div>
       
-      <div className={Play==true || Tempo !== "0.00"?"circle mostrar":"circle"}>
-        <svg width={200} height={200}>
-
-        <circle cx="100" cy="100" r="80" fill="none" stroke="white" strokeWidth="10" strokeDasharray="1,08" />        </svg>
-      </div>
+      <div className={Play==true || Tempo !== "0.00"?"emblem-container esconder": "emblem-container"}>
+            <div className="emblem text">
+              {circulo}
+            </div>
+        </div>
       <div className="center">
         <div className="display">
           <div className={Play==true || Tempo !== "0.00" ?"image esconder":"image"} style={estilo}></div>
