@@ -6,6 +6,7 @@ para deixar as animações mais fluidas*/
   src: url("./font/BebasNeue-Regular.ttf");
 }
 :root{
+  --emblem-size: 280px;
   --cor:none;
   --cor2:none;
   --album-size: 580px;
@@ -92,6 +93,7 @@ audio{
   width: 70%;
   margin-left: 20px;
 }
+
 #progress-bar{
   cursor: pointer;
 }
@@ -366,10 +368,9 @@ audio{
 	text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
 }
 .emblem-container.esconder{
-  left: -10vw;
+  left: 10vw;
 }
 .emblem-container {
-	--emblem-size: 280px;
 	height: var(--emblem-size);
 	width: var(--emblem-size);
 	position: absolute;
@@ -463,9 +464,9 @@ h1 {
   .emblem-container.esconder{
     left: -25vw;
   }
-  :root {
-		--album-size: 50vw;
-	}
+  :root{
+    --album-size: 10vh;
+  }
   .frase{
     font-size: 20px;
     width: 70px;
@@ -486,4 +487,13 @@ h1 {
   .banner p {
     font-size: 50px;
   }
+}
+@media screen and (max-width:375px) {
+  .emblem-container.esconder{
+    left: -17vw;
+  }
+  :root {
+    --emblem-size:180px;
+		--album-size: 10vh;
+	}
 }

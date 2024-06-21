@@ -18,6 +18,7 @@ export default function Home(){
   const [Play, setPlay] = useState(false);
   const [load, setload] =useState(true)
   const [circulo, setcirculo] = useState(criar_circulo("As Mais Tocadas"))
+  const [progressPercent, setprogressPercent] = useState(0)
 
   useEffect(() => {
     document.documentElement.style.setProperty('--cor', cor2);
@@ -87,21 +88,22 @@ export default function Home(){
     }
     setPlay(!Play);
   };
-  const atualizarBarra = (e) => {
+  function atualizarBarra(e){
     const audio = document.getElementById('audio');
+    const duracao = audio.duration
+    console.log(duracao)
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const width = rect.width;
-
     // Verifica se o clique está dentro dos limites da barra de progresso
     if (x >= 0 && x <= width) {
       const percentage = x / width;
-      const newTime = duration * percentage;
+      setprogressPercent(x)
+      const newTime = duracao * percentage;
       converter_tempo(newTime)
       audio.currentTime = newTime;
     }
   };
-  const progressPercent = (currentTime / duration) * 100;
 
   function criar_circulo(letra, delimitador = "•"){
     const spans = [];
@@ -160,6 +162,7 @@ export default function Home(){
       setintervalosTempo(armazenar_intervalos(musicas[Indice-1].letras))
     }
   }
+  const progress = (currentTime / duration) * 100;
   const estilo = {
     backgroundImage: "url("+foto+")",
     backgroundRepeat: 'no-repeat',
@@ -207,7 +210,6 @@ export default function Home(){
         
         <p className="segundo">{dados.nome[1]}</p>
       </div>
-      
       <div className={Play==true || Tempo !== "0.00"?"emblem-container esconder": "emblem-container"}>
             <div className="emblem text">
               {circulo}
@@ -255,13 +257,8 @@ export default function Home(){
             <h4>{dados.nome[0]+" "+dados.nome[1]+"("+dados.artista+")"}</h4>
             <p className="album">{dados.album} </p>
             <div className="reprodutor">
-              <div id="progress-bar" style={{ width: '80%', height: '5px', backgroundColor: 'rgb(220,220,220)'  }} onClick={atualizarBarra}>
-                <div id="progress" style={{ 
-                  height: '100%', 
-                  backgroundColor: 
-                  'white', width: 
-                  `${progressPercent}%` }}>
-                </div>
+              <div id="progress-bar" style={{ width: '80%', height: '5px',boxShadow: "inset "+progressPercent+"px 0px 0px white", background: 'rgb(220,220,220)'  }} onClick={(event)=> atualizarBarra(event)}>
+
               </div>
               <p className="timer">{Tempo}</p>
               <button onClick={eventoPlayPausar}>{Play? "❚❚":"►"}</button>
