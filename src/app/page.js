@@ -29,6 +29,7 @@ export default function Home(){
   }, [Indice, intervalosTempo]);
   const handleTimeUpdate = (event) => {
     if(event.target.currentTime === event.target.duration){
+      atualizarBarra2()
       setCurrentTime(0)
       setDuration(0)
       setTempo("0.00")
@@ -36,6 +37,7 @@ export default function Home(){
       setPlay(false)
     }
     else{
+      atualizarBarra2()
       setCurrentTime(event.target.currentTime);
       converter_tempo(event.target.currentTime)
       setDuration(event.target.duration);  
@@ -88,6 +90,15 @@ export default function Home(){
     }
     setPlay(!Play);
   };
+  function atualizarBarra2(){
+    const bar = document.getElementById("progress-bar")
+    const audio = document.getElementById('audio');
+    const duracao = audio.duration
+    const currentTime = audio.currentTime
+    const percentual = currentTime/duracao
+    const x = percentual*bar.getBoundingClientRect().width
+    setprogressPercent(x)
+  }
   function atualizarBarra(e){
     const audio = document.getElementById('audio');
     const duracao = audio.duration
